@@ -1,0 +1,45 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25%;
+    font-family: 'Inter', sans-serif;
+}
+
+.WeatherItem {
+    max-width: 300px;
+    text-align: center;
+    &__temp {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        color: #020826;
+        margin-bottom: 8px;
+    }
+
+    &__geo {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: #020826;
+        margin-bottom: 8px;
+    }
+
+    &__desc {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #315A90;
+        margin-bottom: 24px;
+    }
+
+    &__stat {
+        display: flex;
+        margin-bottom: 24px;
+        justify-content: space-between;
+    }
+}
