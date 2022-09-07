@@ -1,5 +1,6 @@
 export interface WeatherInfoI {
-    id?: number,
+    id: number,
+    order: number,
     city: string,
     country: string,
     temp: number,
@@ -12,10 +13,6 @@ export interface WeatherInfoI {
     visibility: number,
 }
 
-export interface WeatherSettingsI {
-    weatherLocation: WeatherInfoI[];
-}
-
 export interface StorageI {
     getState(): WeatherInfoI[];
     setState(data: WeatherInfoI): void;
@@ -25,9 +22,4 @@ export interface StorageI {
 export interface ServerI {
     getWeatherInfoByCords(lat: number, lon: number): Promise<WeatherInfoI>;
     getNewLocation(cityName: string): Promise<WeatherInfoI>;
-}
-
-export interface WidgetI {
-    weatherInfo: WeatherInfoI[];
-    storage: StorageI;
 }

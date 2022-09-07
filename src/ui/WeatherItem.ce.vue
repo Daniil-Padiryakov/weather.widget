@@ -13,27 +13,27 @@
 
     <div class="WeatherItem__stat">
       <div>
-        <div>Wind Speed</div>
+        <div class="WeatherItem__stat_heading">Wind Speed</div>
         <div>{{ info.windSpeed }} m/s SSE</div>
       </div>
 
       <div>
-        <div>Pressure</div>
+        <div class="WeatherItem__stat_heading">Pressure</div>
         <div>{{ info.pressure }}hPa</div>
       </div>
     </div>
 
     <div class="WeatherItem__stat">
       <div>
-        <div>Humidity</div>
+        <div class="WeatherItem__stat_heading">Humidity</div>
         <div>{{ info.humidity }}%</div>
       </div>
       <div>
-        <div>Grnd level</div>
+        <div class="WeatherItem__stat_heading">Grnd level</div>
         <div>{{ info.grndLevel }}C</div>
       </div>
       <div>
-        <div>Visibility</div>
+        <div class="WeatherItem__stat_heading">Visibility</div>
         <div>{{ info.visibility }}km</div>
       </div>
     </div>

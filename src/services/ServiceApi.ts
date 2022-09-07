@@ -1,5 +1,5 @@
 import {ServerI, WeatherInfoI} from "../types";
-import {resss} from "../types/test";
+import {LocalStorageA} from "./LocalStorageA";
 
 export class ServiceApi implements ServerI {
     constructor(private API_KEY: string) {}
@@ -16,9 +16,20 @@ export class ServiceApi implements ServerI {
             .then((data) => data)
     }
 
-    private async formatWeatherInfo(data: resss): Promise<WeatherInfoI> {
+    private async formatWeatherInfo(data: any): Promise<WeatherInfoI> {
+        const storage = new LocalStorageA;
+        const state = storage.getState();
+        let nextOrder = 1;
+
+        for (let i = 0; i < state.length; i++) {
+            if (state[i].order >= nextOrder) {
+                nextOrder = state[i].order;
+                nextOrder++;
+            }
+        }
         return {
             id: data.id,
+            order: nextOrder,
             city: data.name,
             country: data.sys.country,
             temp: data.main.temp,
@@ -40,7 +51,7 @@ export class ServiceApi implements ServerI {
     }
 
     public async getNewLocation(cityName: string): Promise<WeatherInfoI> {
-        const fullInfo: resss = await this.getCordsByNameCity(cityName);
+        const fullInfo = await this.getCordsByNameCity(cityName);
         return this.formatWeatherInfo(fullInfo);
     }
 }

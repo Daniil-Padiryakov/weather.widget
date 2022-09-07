@@ -1,21 +1,26 @@
 @import "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css";
 
-.app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25%;
+.Weather-widget {
     font-family: 'Inter', sans-serif;
+
+    &__btn {
+        margin-bottom: 10px;
+    }
 }
 
 .WeatherItem {
     max-width: 300px;
     text-align: center;
     padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+
+    &:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
     &__temp {
-        font-style: normal;
         font-weight: 600;
         font-size: 36px;
         line-height: 44px;
@@ -24,8 +29,6 @@
     }
 
     &__geo {
-        font-style: normal;
-        font-weight: 400;
         font-size: 20px;
         line-height: 24px;
         color: #020826;
@@ -33,8 +36,6 @@
     }
 
     &__desc {
-        font-style: normal;
-        font-weight: 400;
         font-size: 14px;
         line-height: 17px;
         color: #315A90;
@@ -45,6 +46,10 @@
         display: flex;
         margin-bottom: 24px;
         justify-content: space-between;
+
+        &_heading {
+            font-weight: 600;
+        }
     }
 }
 
@@ -59,6 +64,9 @@
     &__item {
         display: flex;
         justify-content: space-between;
+        background-color: whitesmoke;
+        padding: 10px;
+        border-radius: 10px;
 
         &:not(:last-child) {
             margin-bottom: 15px;
