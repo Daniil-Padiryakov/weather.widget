@@ -7,7 +7,7 @@ export class LocalStorageA implements StorageI {
         this.getStateFromLC();
     }
 
-    private getStateFromLC() {
+    private getStateFromLC(): WeatherInfoI[] {
         const dataFromLC = localStorage.getItem(this._KEY_FOR_LC);
         if (dataFromLC) {
             return JSON.parse(dataFromLC);
@@ -16,7 +16,6 @@ export class LocalStorageA implements StorageI {
     }
 
     private setStateToLC(data: any) {
-        console.log(data)
         const dataToLC = JSON.stringify(data);
         localStorage.removeItem(this._KEY_FOR_LC);
         localStorage.setItem(this._KEY_FOR_LC, dataToLC);
@@ -28,5 +27,11 @@ export class LocalStorageA implements StorageI {
 
     public getState(): WeatherInfoI[] {
         return this.getStateFromLC();
+    }
+
+    public removeItemFromState(id: number) {
+        const state = this.getStateFromLC();
+        const newState = state.filter(item => item.id !== id)
+        this.setStateToLC(newState);
     }
 }

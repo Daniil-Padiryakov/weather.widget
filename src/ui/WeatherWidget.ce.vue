@@ -1,17 +1,25 @@
 <template>
   <button v-if="!state.isSettingsOpen"
           @click="handlerShowSettings"
-          class="btn btn-primary">Settings</button>
-  <weather-settings v-if="state.isSettingsOpen"
-                    @closeSettings="handlerShowSettings"
-                    @addNewLocationToState="setNewWeatherInfo"></weather-settings>
-  <weather-item v-if="!state.isSettingsOpen"
-                v-for="info in state.weatherInfo"
-                :info="info"></weather-item>
+          class="btn btn-primary">Settings
+  </button>
+
+  <weather-settings
+      v-if="state.isSettingsOpen"
+      :info="state.weatherInfo"
+      @closeSettings="handlerShowSettings"
+      @addNewLocationToState="setNewWeatherInfo"
+      @deleteInfoWeather="deleteInfoWeather"
+  ></weather-settings>
+
+  <weather-item
+      v-if="!state.isSettingsOpen"
+      v-for="info in state.weatherInfo"
+      :info="info">
+  </weather-item>
 </template>
 
 <script setup lang="ts">
-
 import {onMounted, reactive, watch} from "vue";
 import WeatherItem from './WeatherItem.ce.vue'
 import WeatherSettings from './WeatherSettings.ce.vue'
@@ -59,6 +67,11 @@ watch(() => state.latitude, async (latitude) => {
 
 const setNewWeatherInfo = (newInfo: WeatherInfoI) => {
   saveStateToLC(newInfo);
+}
+
+const deleteInfoWeather = (id: number) => {
+  state.weatherInfo = state.weatherInfo.filter(item => item.id !== id);
+  storage.removeItemFromState(id)
 }
 
 </script>

@@ -46,6 +46,4 @@
 import {WeatherInfoI} from "../types";
 
 const {info} = defineProps<{ info: WeatherInfoI }>()
-
-// console.log(info)
 </script>

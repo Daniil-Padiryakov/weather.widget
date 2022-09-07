@@ -19,6 +19,7 @@ export interface WeatherSettingsI {
 export interface StorageI {
     getState(): WeatherInfoI[];
     setState(data: WeatherInfoI): void;
+    removeItemFromState(id: number): void;
 }
 
 export interface ServerI {

@@ -6,20 +6,12 @@
     </div>
 
     <ul>
-      <li class="Settings__item">
-        <div>test</div>
-        <div>name</div>
-        <button class="btn btn-danger">delete</button>
-      </li>
-      <li class="Settings__item">
-        <div>test</div>
-        <div>name</div>
-        <button class="btn btn-danger">delete</button>
-      </li>
-      <li class="Settings__item">
-        <div>test</div>
-        <div>name</div>
-        <button class="btn btn-danger">delete</button>
+      <li v-for="item in info" class="Settings__item">
+        <div>
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <div>{{ item.city }}</div>
+        <button @click="emit('deleteInfoWeather', item.id)" class="btn btn-danger">delete</button>
       </li>
     </ul>
 
@@ -36,9 +28,10 @@
 <script setup lang="ts">
 import {reactive} from "vue";
 import {ServiceApi} from "../entities/ServiceApi";
+import {WeatherInfoI} from "../types";
 
-const emit = defineEmits(['closeSettings', 'addNewLocationToState'])
-
+const {info} = defineProps<{ info: WeatherInfoI[] }>()
+const emit = defineEmits(['closeSettings', 'addNewLocationToState', 'deleteInfoWeather'])
 const apiKey = '718e1d845dac45dade8082a07f5a4c31'
 
 const state = reactive({
@@ -50,6 +43,13 @@ const api = new ServiceApi(apiKey);
 const addNewLocation = async () => {
   const newWeatherInfo = await api.getNewLocation(state.nameCity);
   state.nameCity = '';
+
+  const infoWeatherWithSameId = info.find(item => item.id === newWeatherInfo.id)
+  if (infoWeatherWithSameId) {
+    alert('This location is already added')
+    return null
+  }
+
   emit('addNewLocationToState', newWeatherInfo);
 }
 
