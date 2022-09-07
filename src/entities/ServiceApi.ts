@@ -27,7 +27,7 @@ export class ServiceApi implements ServerI {
             windSpeed: data.wind.speed,
             pressure: data.main.pressure,
             humidity: data.main.humidity,
-            dewPoint: data.main.grnd_level,
+            grndLevel: data.main.grnd_level,
             visibility: data.visibility,
         }
     }

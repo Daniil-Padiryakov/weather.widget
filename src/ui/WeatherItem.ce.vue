@@ -7,20 +7,19 @@
     </div>
 
     <div class="WeatherItem__desc">
-      <div class="app__temp">feels like {{ info.tempDesc }}</div>
-      <div class="app__temp">feels like {{ info.cloudsDesc }}</div>
-      <div class="app__temp">feels like {{ info.windDesc }}</div>
+      <div class="app__temp">Feels like {{ info.tempFeels }}</div>
+      <div class="app__temp">{{ info.weatherDesc }}</div>
     </div>
 
     <div class="WeatherItem__stat">
       <div>
-        <div>windSpeed</div>
+        <div>Wind Speed</div>
         <div>{{ info.windSpeed }} m/s SSE</div>
       </div>
 
       <div>
-        <div>test</div>
-        <div>feels like {{ info.test }}hPa</div>
+        <div>Pressure</div>
+        <div>{{ info.pressure }}hPa</div>
       </div>
     </div>
 
@@ -30,8 +29,8 @@
         <div>{{ info.humidity }}%</div>
       </div>
       <div>
-        <div>Dew point</div>
-        <div>{{ info.dewPoint }}C</div>
+        <div>Grnd level</div>
+        <div>{{ info.grndLevel }}C</div>
       </div>
       <div>
         <div>Visibility</div>

@@ -8,7 +8,7 @@ export interface WeatherInfoI {
     windSpeed: number,
     pressure: number,
     humidity: number,
-    dewPoint: number,
+    grndLevel: number,
     visibility: number,
 }
 
@@ -18,7 +18,7 @@ export interface WeatherSettingsI {
 
 export interface StorageI {
     getState(): WeatherInfoI[];
-    setState(data: WeatherInfoI[]): void;
+    setState(data: WeatherInfoI): void;
 }
 
 export interface ServerI {

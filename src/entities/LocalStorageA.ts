@@ -1,7 +1,6 @@
 import {StorageI, WeatherInfoI} from "../types";
 
 export class LocalStorageA implements StorageI {
-    private _state: WeatherInfoI[] = [];
     private _KEY_FOR_LC: string = 'Weather_Widget_State';
 
     constructor() {
@@ -11,21 +10,23 @@ export class LocalStorageA implements StorageI {
     private getStateFromLC() {
         const dataFromLC = localStorage.getItem(this._KEY_FOR_LC);
         if (dataFromLC) {
-            this._state = JSON.parse(dataFromLC);
+            return JSON.parse(dataFromLC);
         }
+        return [];
     }
 
-    private setStateToLC() {
-        const dataToLC = JSON.stringify(this._state);
+    private setStateToLC(data: any) {
+        console.log(data)
+        const dataToLC = JSON.stringify(data);
+        localStorage.removeItem(this._KEY_FOR_LC);
         localStorage.setItem(this._KEY_FOR_LC, dataToLC);
     }
 
-    public setState(data: WeatherInfoI[]) {
-        this._state = [...this._state, ...data];
-        this.setStateToLC();
+    public setState(data: WeatherInfoI) {
+        this.setStateToLC([...this.getStateFromLC(), data]);
     }
 
     public getState(): WeatherInfoI[] {
-        return this._state;
+        return this.getStateFromLC();
     }
 }
