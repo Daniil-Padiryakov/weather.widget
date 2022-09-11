@@ -1,24 +1,29 @@
-import {ServerI, WeatherInfoI} from "../types";
-import {LocalStorageA} from "./LocalStorageA";
+import {ServerI, StorageI, WeatherInfoI} from "../types";
 
 export class ServiceApi implements ServerI {
-    constructor(private API_KEY: string) {}
+    private API_KEY: string = import.meta.env.VITE_API_KEY;
+    private API_URL: string = import.meta.env.VITE_API_URL;
+
+    constructor(private storage: StorageI) {}
+
+    private async getWeatherDataByCords(lat: number, lon: number): Promise<any> {
+        return fetch(`${this.API_URL}data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${this.API_KEY}`)
+            .then((res) => res.json())
+            .then((data) => data)
+    }
 
     private async getCordsByNameCity(cityName: string) {
-        const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${this.API_KEY}`)
+        const response = await fetch(`${this.API_URL}geo/1.0/direct?q=${cityName}&limit=1&appid=${this.API_KEY}`)
             .then((res) => res.json())
             .then((data) => data[0])
 
         const {lat, lon} = response;
 
-        return fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${this.API_KEY}`)
-            .then((res) => res.json())
-            .then((data) => data)
+        return this.getWeatherDataByCords(lat, lon)
     }
 
     private async formatWeatherInfo(data: any): Promise<WeatherInfoI> {
-        const storage = new LocalStorageA;
-        const state = storage.getState();
+        const state = this.storage.getState();
         let nextOrder = 1;
 
         for (let i = 0; i < state.length; i++) {
@@ -44,13 +49,11 @@ export class ServiceApi implements ServerI {
     }
 
     public async getWeatherInfoByCords(lat: number, lon: number): Promise<WeatherInfoI> {
-        const fullInfo = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${this.API_KEY}`)
-            .then((res) => res.json())
-            .then((data) => data)
+        const fullInfo = await this.getWeatherDataByCords(lat, lon);
         return this.formatWeatherInfo(fullInfo);
     }
 
-    public async getNewLocation(cityName: string): Promise<WeatherInfoI> {
+    public async getNewLocationByName(cityName: string): Promise<WeatherInfoI> {
         const fullInfo = await this.getCordsByNameCity(cityName);
         return this.formatWeatherInfo(fullInfo);
     }

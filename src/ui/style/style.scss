@@ -1,83 +1,84 @@
-@import "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css";
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css";
+//@import "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css";
+@import "./common";
 
 .Weather-widget {
-    font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
 
-    &__btn {
-        margin-bottom: 10px;
-    }
+  &__btn {
+    margin-bottom: 10px;
+  }
 }
 
 .WeatherItem {
-    max-width: 300px;
-    text-align: center;
-    padding: 10px;
-    background-color: whitesmoke;
-    border-radius: 20px;
+  max-width: 300px;
+  text-align: center;
+  padding: 10px;
+  background-color: whitesmoke;
+  border-radius: 20px;
 
-    &:not(:last-child) {
-        margin-bottom: 15px;
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &__temp {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: #020826;
+    margin-bottom: 8px;
+  }
+
+  &__geo {
+    font-size: 20px;
+    line-height: 24px;
+    color: #020826;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-size: 14px;
+    line-height: 17px;
+    color: #315A90;
+    margin-bottom: 24px;
+  }
+
+  &__stat {
+    display: flex;
+    margin-bottom: 24px;
+    justify-content: space-between;
+
+    &_heading {
+      font-weight: 600;
     }
-
-    &__temp {
-        font-weight: 600;
-        font-size: 36px;
-        line-height: 44px;
-        color: #020826;
-        margin-bottom: 8px;
-    }
-
-    &__geo {
-        font-size: 20px;
-        line-height: 24px;
-        color: #020826;
-        margin-bottom: 8px;
-    }
-
-    &__desc {
-        font-size: 14px;
-        line-height: 17px;
-        color: #315A90;
-        margin-bottom: 24px;
-    }
-
-    &__stat {
-        display: flex;
-        margin-bottom: 24px;
-        justify-content: space-between;
-
-        &_heading {
-            font-weight: 600;
-        }
-    }
+  }
 }
 
 .Settings {
-    max-width: 300px;
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
+  max-width: 300px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 10px;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
     }
+  }
 
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        background-color: whitesmoke;
-        padding: 10px;
-        border-radius: 10px;
+  &__new {
+    display: flex;
 
-        &:not(:last-child) {
-            margin-bottom: 15px;
-        }
+    &-btn {
+      align-self: flex-end;
     }
-
-    &__new {
-        display: flex;
-
-        &-btn {
-            align-self: flex-end;
-        }
-    }
+  }
 }

@@ -2,7 +2,7 @@
   <div class="Weather-widget">
     <button v-if="!state.isSettingsOpen"
             @click="handlerShowSettings"
-            class="btn btn-primary Weather-widget__btn">Settings
+            class="Weather-widget__btn btn btn-primary">Settings
     </button>
 
     <weather-settings
@@ -31,9 +31,8 @@ import {WeatherInfoI} from "../types";
 import {LocalStorageA} from "../services/LocalStorageA";
 import {ServiceApi} from "../services/ServiceApi";
 
-const apiKey = '718e1d845dac45dade8082a07f5a4c31'
-const api = new ServiceApi(apiKey);
 const storage = new LocalStorageA();
+const api = new ServiceApi(storage);
 
 const state = reactive({
   weatherInfo: [] as WeatherInfoI[],

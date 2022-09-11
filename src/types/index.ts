@@ -21,5 +21,5 @@ export interface StorageI {
 
 export interface ServerI {
     getWeatherInfoByCords(lat: number, lon: number): Promise<WeatherInfoI>;
-    getNewLocation(cityName: string): Promise<WeatherInfoI>;
+    getNewLocationByName(cityName: string): Promise<WeatherInfoI>;
 }

@@ -34,6 +34,7 @@
 import {reactive} from "vue";
 import {ServiceApi} from "../services/ServiceApi";
 import {WeatherInfoI} from "../types";
+import {LocalStorageA} from "../services/LocalStorageA";
 
 let {info} = defineProps<{ info: WeatherInfoI[] }>()
 const emit = defineEmits([
@@ -42,16 +43,15 @@ const emit = defineEmits([
   'deleteInfoWeather',
   'changeOrderItems',
 ])
-const apiKey = '718e1d845dac45dade8082a07f5a4c31'
 
 const state = reactive({
   nameCity: '',
 })
 
-const api = new ServiceApi(apiKey);
+const api = new ServiceApi(new LocalStorageA());
 
 const addNewLocation = async () => {
-  const newWeatherInfo = await api.getNewLocation(state.nameCity);
+  const newWeatherInfo = await api.getNewLocationByName(state.nameCity);
   state.nameCity = '';
   emit('addNewLocationToState', newWeatherInfo);
 }
