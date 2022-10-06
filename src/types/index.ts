@@ -23,3 +23,7 @@ export interface ServerI {
     getWeatherInfoByCords(lat: number, lon: number): Promise<WeatherInfoI>;
     getNewLocationByName(cityName: string): Promise<WeatherInfoI>;
 }
+
+export interface LocationI {
+    getCurrentLocation(): Promise<{ latitude: number, longitude: number }>;
+}

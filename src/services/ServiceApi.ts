@@ -1,8 +1,8 @@
 import {ServerI, StorageI, WeatherInfoI} from "../types";
 
 export class ServiceApi implements ServerI {
-    private API_KEY: string = import.meta.env.VITE_API_KEY;
-    private API_URL: string = import.meta.env.VITE_API_URL;
+    private API_KEY: string = process.env.VITE_API_KEY ? process.env.VITE_API_KEY : '';
+    private API_URL: string = process.env.VITE_API_URL ? process.env.VITE_API_URL : '';
 
     constructor(private storage: StorageI) {}
 

@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import './ui/style/style.scss'
-import WeatherWidget from './ui/WeatherWidget.ce.vue'
+import WeatherWidget from './ui/WeatherWidget.vue'
 
 createApp(WeatherWidget).mount('#app')
 
