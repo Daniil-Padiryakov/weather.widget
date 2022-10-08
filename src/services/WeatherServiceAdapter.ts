@@ -1,10 +1,11 @@
-import {ServerI, StorageI, WeatherInfoI} from "../types";
+import { WeatherInfoI} from "../types";
+import {WeatherServiceI, WeatherStorageServiceI} from "../app/ports";
 
-export class ServiceApi implements ServerI {
+export class WeatherService implements WeatherServiceI {
     private API_KEY: string = process.env.VITE_API_KEY ? process.env.VITE_API_KEY : '';
     private API_URL: string = process.env.VITE_API_URL ? process.env.VITE_API_URL : '';
 
-    constructor(private storage: StorageI) {}
+    constructor(private storage: WeatherStorageServiceI) {}
 
     private async getWeatherDataByCords(lat: number, lon: number): Promise<any> {
         return fetch(`${this.API_URL}data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${this.API_KEY}`)

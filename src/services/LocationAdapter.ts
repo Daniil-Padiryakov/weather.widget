@@ -1,6 +1,6 @@
-import {LocationI} from "../types";
+import {LocationServiceI} from "../app/ports";
 
-export class GeoLocation implements LocationI{
+export class LocationService implements LocationServiceI {
     public getCurrentLocation() {
         const getCurrentLocationPromise = (): Promise<{ latitude: number, longitude: number }> => {
             return new Promise((resolve, reject) => {

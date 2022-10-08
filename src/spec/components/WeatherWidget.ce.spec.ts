@@ -16,10 +16,7 @@ describe('Weather Widget ce', () => {
             data() {
                 return {
                     weatherInfo: [{"id":499099,"order":1,"city":"Samara","country":"RU","temp":10.64,"tempFeels":9.46,"weatherDesc":"overcast clouds","windSpeed":3.52,"pressure":1018,"humidity":65,"grndLevel":1015,"visibility":10000}] as WeatherInfoI[],
-                    latitude: 0,
-                    longitude: 0,
                     isSettingsOpen: false,
-                    isInit: false,
                 }
             },
         });

@@ -1,6 +1,7 @@
-import {StorageI, WeatherInfoI} from "../types";
+import {WeatherInfoI} from "../types";
+import {WeatherStorageServiceI} from "../app/ports";
 
-export class LocalStorageA implements StorageI {
+export class LocalStorageAdapter implements WeatherStorageServiceI {
     private _KEY_FOR_LC: string = 'Weather_Widget_State';
 
     constructor() {
@@ -15,14 +16,14 @@ export class LocalStorageA implements StorageI {
         return [];
     }
 
-    private setStateToLC(data: any) {
+    private setStateToLC(data: WeatherInfoI[]) {
         const dataToLC = JSON.stringify(data);
         localStorage.removeItem(this._KEY_FOR_LC);
         localStorage.setItem(this._KEY_FOR_LC, dataToLC);
     }
 
-    public setState(data: WeatherInfoI) {
-        this.setStateToLC([...this.getStateFromLC(), data]);
+    public setState(data: WeatherInfoI[]) {
+        this.setStateToLC([...data]);
     }
 
     public getState(): WeatherInfoI[] {

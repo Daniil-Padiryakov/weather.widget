@@ -43,9 +43,7 @@
 
 <script setup lang="ts">
 import {reactive} from "vue";
-import {ServiceApi} from "../services/ServiceApi";
 import {WeatherInfoI} from "../types";
-import {LocalStorageA} from "../services/LocalStorageA";
 
 let {info} = defineProps<{ info: WeatherInfoI[] }>()
 const emit = defineEmits([
@@ -54,20 +52,16 @@ const emit = defineEmits([
   'deleteInfoWeather',
   'changeOrderItems',
 ])
+let currentItem: WeatherInfoI;
 
 const state = reactive({
   nameCity: '',
 })
 
-const api = new ServiceApi(new LocalStorageA());
-
 const addNewLocation = async () => {
-  const newWeatherInfo = await api.getNewLocationByName(state.nameCity);
+  emit('addNewLocationToState', state.nameCity);
   state.nameCity = '';
-  emit('addNewLocationToState', newWeatherInfo);
 }
-
-let currentItem: WeatherInfoI;
 
 const onDragStart = (e: DragEvent, item: WeatherInfoI) => {
   currentItem = item;
