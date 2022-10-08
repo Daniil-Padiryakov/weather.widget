@@ -1,12 +1,12 @@
 import {LocationServiceI, WeatherServiceI, WeatherStorageServiceI} from "./ports";
-import {LocationService} from "../services/LocationAdapter";
-import {WeatherService} from "../services/WeatherServiceAdapter";
+import {LocationServiceAdapter} from "../services/LocationServiceAdapter";
+import {WeatherServiceAdapter} from "../services/WeatherServiceAdapter";
 import {LocalStorageAdapter} from "../services/LocalStorageAdapter";
 
 export function useInitWeatherInfo() {
-    const location: LocationServiceI = new LocationService();
+    const location: LocationServiceI = new LocationServiceAdapter();
     const storage: WeatherStorageServiceI = new LocalStorageAdapter();
-    const api: WeatherServiceI = new WeatherService(storage);
+    const api: WeatherServiceI = new WeatherServiceAdapter(storage);
 
     return async function initWeatherInfo() {
         const { latitude, longitude } = await location.getCurrentLocation();

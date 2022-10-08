@@ -32,12 +32,14 @@ import {useDeleteWeatherInfo} from "../app/deleteWeatherInfo";
 import {useAddWeatherInfo} from "../app/addWeatherInfo";
 import { LocalStorageAdapter } from "../services/LocalStorageAdapter";
 import {useInitWeatherInfo} from "../app/initWeatherInfo";
+import {useChangeOrderWeatherItems} from "../app/changeOrderWeatherItems";
 
 const storage = new LocalStorageAdapter();
 
 const initWeatherInfo = useInitWeatherInfo();
 const deleteWeatherInfo = useDeleteWeatherInfo();
 const addWeatherInfo = useAddWeatherInfo();
+const {changeOrderWeatherItems, sortItems} = useChangeOrderWeatherItems();
 
 export default defineComponent({
   components: {
@@ -66,27 +68,12 @@ export default defineComponent({
     },
 
     changeOrder(item: WeatherInfoI, currentItem: WeatherInfoI) {
-      this.weatherInfo = this.weatherInfo.map(infoItem => {
-        if (infoItem.id === item.id) {
-          return {...infoItem, order: currentItem.order}
-        }
-        if (infoItem.id === currentItem.id) {
-          return {...infoItem, order: item.order}
-        }
-        return infoItem;
-      })
-    },
-    sortItems(a: WeatherInfoI, b: WeatherInfoI) {
-      if (a.order > b.order) {
-        return 1;
-      } else {
-        return -1;
-      }
+      this.weatherInfo = changeOrderWeatherItems(item, currentItem, this.weatherInfo);
     },
   },
   computed: {
     sortedItemInfo() {
-      return [...this.weatherInfo].sort(this.sortItems)
+      return [...this.weatherInfo].sort(sortItems)
     }
   },
   async mounted() {

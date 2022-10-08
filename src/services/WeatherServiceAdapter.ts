@@ -1,7 +1,7 @@
 import { WeatherInfoI} from "../types";
 import {WeatherServiceI, WeatherStorageServiceI} from "../app/ports";
 
-export class WeatherService implements WeatherServiceI {
+export class WeatherServiceAdapter implements WeatherServiceI {
     private API_KEY: string = process.env.VITE_API_KEY ? process.env.VITE_API_KEY : '';
     private API_URL: string = process.env.VITE_API_URL ? process.env.VITE_API_URL : '';
 
