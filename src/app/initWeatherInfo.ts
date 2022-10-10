@@ -9,13 +9,19 @@ export function useInitWeatherInfo() {
     const api: WeatherServiceI = new WeatherServiceAdapter(storage);
 
     return async function initWeatherInfo() {
-        const { latitude, longitude } = await location.getCurrentLocation();
-        // handle user reject get info of coords
+        const state = storage.getState();
 
-        const initWeatherInfo = await api.getWeatherInfoByCords(latitude, longitude);
+        if (state.length === 0) {
+            const { latitude, longitude } = await location.getCurrentLocation();
+            // handle user reject get info of coords
 
-        storage.setState([initWeatherInfo])
+            const initWeatherInfo = await api.getWeatherInfoByCords(latitude, longitude);
 
-        return initWeatherInfo;
+            storage.setState([initWeatherInfo])
+
+            return initWeatherInfo;
+        }
+
+        return null;
     }
 }

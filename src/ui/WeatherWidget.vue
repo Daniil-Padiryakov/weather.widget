@@ -24,17 +24,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import WeatherItem from './WeatherItem.ce.vue'
 import WeatherSettings from './WeatherSettings.ce.vue'
 import {WeatherInfoI} from "../types";
 import {useDeleteWeatherInfo} from "../app/deleteWeatherInfo";
 import {useAddWeatherInfo} from "../app/addWeatherInfo";
-import { LocalStorageAdapter } from "../services/LocalStorageAdapter";
 import {useInitWeatherInfo} from "../app/initWeatherInfo";
 import {useChangeOrderWeatherItems} from "../app/changeOrderWeatherItems";
-
-const storage = new LocalStorageAdapter();
 
 const initWeatherInfo = useInitWeatherInfo();
 const deleteWeatherInfo = useDeleteWeatherInfo();
@@ -76,13 +73,12 @@ export default defineComponent({
       return [...this.weatherInfo].sort(sortItems)
     }
   },
-  async mounted() {
-    this.weatherInfo = storage.getState();
-
-    if (this.weatherInfo.length === 0) {
-      const newWeatherInfo = await initWeatherInfo();
-      this.weatherInfo.push(newWeatherInfo);
-    }
+  mounted() {
+    initWeatherInfo().then(res => {
+      if (res) {
+        this.weatherInfo.push(res);
+      }
+    });
   }
 })
 </script>

@@ -7,7 +7,7 @@ export class WeatherServiceAdapter implements WeatherServiceI {
 
     constructor(private storage: WeatherStorageServiceI) {}
 
-    private async getWeatherDataByCords(lat: number, lon: number): Promise<any> {
+    private async getWeatherDataByCords(lat: number, lon: number): Promise<WeatherInfoI> {
         return fetch(`${this.API_URL}data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${this.API_KEY}`)
             .then((res) => res.json())
             .then((data) => data)
