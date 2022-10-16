@@ -4,7 +4,7 @@ export class LocationServiceAdapter implements LocationServiceI {
     public getCurrentLocation() {
         const getCurrentLocationPromise = (): Promise<{ latitude: number, longitude: number }> => {
             return new Promise((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition(
+                navigator.geolocation?.getCurrentPosition(
                     position => resolve({
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,

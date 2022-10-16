@@ -1,4 +1,4 @@
-import {WeatherInfoI} from "../types";
+import {WeatherInfoI} from "../domain/WeatherInfo";
 import {WeatherStorageServiceI} from "../app/ports";
 
 export class LocalStorageAdapter implements WeatherStorageServiceI {

@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import {WeatherInfoI} from "../types";
+import {WeatherInfoI} from "../domain/WeatherInfo";
 
 const {info} = defineProps<{ info: WeatherInfoI }>()
 </script>

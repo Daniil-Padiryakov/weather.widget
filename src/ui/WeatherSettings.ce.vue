@@ -43,12 +43,12 @@
 
 <script setup lang="ts">
 import {reactive} from "vue";
-import {WeatherInfoI} from "../types";
+import {WeatherInfoI} from "../domain/WeatherInfo";
 
 let {info} = defineProps<{ info: WeatherInfoI[] }>()
 const emit = defineEmits([
   'closeSettings',
-  'addNewLocationToState',
+  'addInfoWeather',
   'deleteInfoWeather',
   'changeOrderItems',
 ])
@@ -59,7 +59,7 @@ const state = reactive({
 })
 
 const addNewLocation = async () => {
-  emit('addNewLocationToState', state.nameCity);
+  emit('addInfoWeather', state.nameCity);
   state.nameCity = '';
 }
 

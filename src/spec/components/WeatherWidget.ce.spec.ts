@@ -1,9 +1,8 @@
 import {mount} from "@vue/test-utils";
-import WeatherWidget from '../../ui/WeatherWidget.vue'
+import WeatherWidget from '../../ui/WeatherWidget.ce.vue'
 import WeatherSettings from '../../ui/WeatherSettings.ce.vue'
 import WeatherItem from '../../ui/WeatherItem.ce.vue'
-import {nextTick} from "vue";
-import {WeatherInfoI} from "../../types";
+import {WeatherInfoI} from "../../domain/WeatherInfo";
 
 describe('Weather Widget ce', () => {
     let wrapper: any;
@@ -22,6 +21,7 @@ describe('Weather Widget ce', () => {
         });
     }
 
+
     afterEach(() => {
         wrapper.unmount();
     })
@@ -34,7 +34,6 @@ describe('Weather Widget ce', () => {
     it('when click Settings button hide it',async () => {
         createComponent();
         await findButtonByText('Settings').trigger('click');
-        await nextTick()
         expect(findButtonByText('Settings')).toBe(undefined);
     })
 

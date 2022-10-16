@@ -12,16 +12,17 @@ export function useInitWeatherInfo() {
         const state = storage.getState();
 
         if (state.length === 0) {
-            const { latitude, longitude } = await location.getCurrentLocation();
-            // handle user reject get info of coords
-
-            const initWeatherInfo = await api.getWeatherInfoByCords(latitude, longitude);
-
-            storage.setState([initWeatherInfo])
-
-            return initWeatherInfo;
+            try {
+                const { latitude, longitude } = await location.getCurrentLocation();
+                const initWeatherInfo = await api.getWeatherInfoByCords(latitude, longitude);
+                storage.setState([initWeatherInfo])
+                return [initWeatherInfo];
+            } catch (e) {
+                // add notification adapter
+                alert('Для работы приложения разрешите использование геолокации')
+            }
+        } else {
+            return state;
         }
-
-        return null;
     }
 }

@@ -9,17 +9,17 @@
         v-if="isSettingsOpen"
         :info="sortedItemInfo"
         @closeSettings="handlerShowSettings"
-        @addNewLocationToState="setNewWeatherInfo"
+        @addInfoWeather="setNewWeatherInfo"
         @deleteInfoWeather="deleteInfoWeather"
         @changeOrderItems="changeOrder"
-    ></weather-settings>
+    />
 
     <weather-item
         v-if="!isSettingsOpen"
         v-for="info in sortedItemInfo"
         :key="info.id"
-        :info="info">
-    </weather-item>
+        :info="info"
+    />
   </div>
 </template>
 
@@ -27,7 +27,7 @@
 import {defineComponent} from "vue";
 import WeatherItem from './WeatherItem.ce.vue'
 import WeatherSettings from './WeatherSettings.ce.vue'
-import {WeatherInfoI} from "../types";
+import {WeatherInfoI} from "../domain/WeatherInfo";
 import {useDeleteWeatherInfo} from "../app/deleteWeatherInfo";
 import {useAddWeatherInfo} from "../app/addWeatherInfo";
 import {useInitWeatherInfo} from "../app/initWeatherInfo";
@@ -76,9 +76,9 @@ export default defineComponent({
   mounted() {
     initWeatherInfo().then(res => {
       if (res) {
-        this.weatherInfo.push(res);
+        this.weatherInfo = res;
       }
-    });
+    })
   }
 })
 </script>

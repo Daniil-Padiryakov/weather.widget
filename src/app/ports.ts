@@ -1,4 +1,4 @@
-import {WeatherInfoI} from "../types";
+import {WeatherInfoI} from "../domain/WeatherInfo";
 
 export interface WeatherServiceI {
     getWeatherInfoByCords(lat: number, lon: number): Promise<WeatherInfoI>;

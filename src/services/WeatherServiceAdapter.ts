@@ -1,4 +1,4 @@
-import { WeatherInfoI} from "../types";
+import { WeatherInfoI} from "../domain/WeatherInfo";
 import {WeatherServiceI, WeatherStorageServiceI} from "../app/ports";
 
 export class WeatherServiceAdapter implements WeatherServiceI {
@@ -23,6 +23,7 @@ export class WeatherServiceAdapter implements WeatherServiceI {
         return this.getWeatherDataByCords(lat, lon)
     }
 
+    // todo refactor
     private async formatWeatherInfo(data: any): Promise<WeatherInfoI> {
         const state = this.storage.getState();
         let nextOrder = 1;
